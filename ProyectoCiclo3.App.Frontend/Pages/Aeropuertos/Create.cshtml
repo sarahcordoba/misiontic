@@ -1,16 +1,21 @@
 @page
+@model ProyectoCiclo3.App.Frontend.Pages.FormAeropuertoModel
 @{
+    var aeropuerto = Model.Aeropuerto;
 }
- 
 <div class="text-center">
-<form action="">
-  <label for="nombre" class="form-label">Nombre:</label>
-  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-  <label for="edad" class="form-label">Edad:</label>
-  <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad">
-  <label for="email" class="form-label">Email:</label>
-  <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-  <hr>
-  <button type="submit" class="btn btn-success">Enviar</button>
-</form>
+  <form method="POST">
+    <label for="nombre" class="form-label">Nombre:</label>
+<input type="text" class="form-control" id="nombre" placeholder="Nombre" asp-for="@aeropuerto.nombre">
+    <label for="ciudad" class="form-label">Ciudad:</label>
+<input type="text" class="form-control" id="ciudad" placeholder="Ciudad" asp-for="@aeropuerto.ciudad">
+    <label for="pais" class="form-label">Pais: </label>
+<input type="text" class="form-control" id="pais" placeholder="Pais" asp-for="@aeropuerto.pais">
+    <label for="coord_x" class="form-label">Coord x:</label>
+<input type="number" class="form-control" id="coord_x" placeholder="Coord x" asp-for="@aeropuerto.coord_x">
+    <label for="coord_y" class="form-label">Coord y:</label>
+<input type="number" class="form-control" id="coord_y" placeholder="Coord y" asp-for="@aeropuerto.coord_y">
+    <hr>
+    <button type="submit" class="btn btn-success">Enviar</button>
+  </form>
 </div>

@@ -1,17 +1,23 @@
 @page
+@model ProyectoCiclo3.App.Frontend.Pages.FormAvionModel
 @{
+    var avion = Model.Avion;
 }
- 
 <div class="text-center">
-<form action="">
-  <label for="nombre" class="form-label">Nombre:</label>
-  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-  <label for="edad" class="form-label">Edad:</label>
-  <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad">
-  <label for="email" class="form-label">Email:</label>
-  <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-  <hr>
-  <button type="submit" class="btn btn-success">Enviar</button>
-</form>
+  <form method="POST">
+    <label for="marca" class="form-label">Marca:</label>
+<input type="text" class="form-control" id="marca" placeholder="Marca" asp-for="@avion.marca">
+    <label for="modelo" class="form-label">Modelo:</label>
+    <input type="number" class="form-control" id="modelo" placeholder="Modelo" asp-for="@avion.modelo">
+    <label for="numero_asientos" class="form-label">Numeros de asientos: </label>
+    
+<input type="number" class="form-control" id="numero_asientos" placeholder="Numero asientos" asp-for="@avion.numero_asientos">
+    <label for="numero_banos" class="form-label">Numero de baños:</label>
+    <input type="number" class="form-control" id="numero_banos" placeholder="Numero baños" asp-for="@avion.numero_banos">
+    <label for="capacidad_max_peso" class="form-label">Capacidad max peso:</label>
+    
+<input type="number" class="form-control" id="capacidad_max_peso" placeholder="Capacidad max peso" asp-for="@avion.capacidad_max_peso">
+    <hr>
+    <button type="submit" class="btn btn-success">Enviar</button>
+  </form>
 </div>
-

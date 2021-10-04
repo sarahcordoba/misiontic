@@ -4,14 +4,38 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ProyectoCiclo3.App.Persistencia.AppRepositorios;
+using ProyectoCiclo3.App.Dominio;
  
 namespace ProyectoCiclo3.App.Frontend.Pages
 {
-    public class ListAvionesModel : PageModel
+    public class ListAvionModel : PageModel
     {
-        public void OnGet()
-        {
+       
+        private readonly RepositorioAviones repositorioAviones;
+        public IEnumerable<Aviones> Aviones {get;set;}
+        [BindProperty]
+        public Aviones Avion {get;set;}
+
  
+    public ListAvionModel(RepositorioAviones repositorioAviones)
+    {
+        this.repositorioAviones=repositorioAviones;
+     }
+ 
+    public void OnGet()
+    {
+        Aviones=repositorioAviones.GetAll();
+    }
+
+    public IActionResult OnPost()
+    {
+        if(Avion.id>0)
+        {
+        Avion = repositorioAviones.Delete(Avion.id);
         }
+        return RedirectToPage("./List");
+    }
+
     }
 }

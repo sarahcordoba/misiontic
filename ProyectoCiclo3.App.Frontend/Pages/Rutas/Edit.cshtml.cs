@@ -8,15 +8,20 @@ using ProyectoCiclo3.App.Persistencia.AppRepositorios;
 using ProyectoCiclo3.App.Dominio;
 namespace ProyectoCiclo3.App.Frontend.Pages
 {
-    public class FormAeropuertoModel : PageModel
+    public class EditRutaModel : PageModel
     {
-        private readonly RepositorioAeropuertos repositorioAeropuertos;
+        private readonly RepositorioRutas repositorioRutas;
         [BindProperty]
-        public Aeropuertos Aeropuerto {get;set;}
-    public FormAeropuertoModel(RepositorioAeropuertos repositorioAeropuertos)
+        public Rutas Ruta {get;set;}
+    public EditRutaModel(RepositorioRutas repositorioRutas)
        {
-            this.repositorioAeropuertos=repositorioAeropuertos;
+            this.repositorioRutas=repositorioRutas;
        }
+    public IActionResult OnGet(int rutaId)
+        {
+            Ruta=repositorioRutas.GetRutaWithId(rutaId);
+            return Page(); 
+        }
 
     public IActionResult OnPost()
         {
@@ -24,9 +29,10 @@ namespace ProyectoCiclo3.App.Frontend.Pages
             {
                 return Page();
             }
-           
-            Aeropuerto = repositorioAeropuertos.Create(Aeropuerto);
-            
+            if(Ruta.id>0)
+            {
+            Ruta = repositorioRutas.Update(Ruta);
+            }
                 return RedirectToPage("./List");
         }
 

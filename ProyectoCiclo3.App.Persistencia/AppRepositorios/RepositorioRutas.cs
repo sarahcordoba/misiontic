@@ -8,50 +8,40 @@ namespace ProyectoCiclo3.App.Persistencia.AppRepositorios
     public class RepositorioRutas
     {
         List<Rutas> rutas;
- 
-    public RepositorioRutas()
-    {
-        rutas= new List<Rutas>()
-        {
-            new Rutas{id=1,origen="Airbus",destino= "miksa",tiempo_estimado= 4},
-            new Rutas{id=2,origen="Boeing 787",destino= "lacasatyuya",tiempo_estimado= 16},
-            new Rutas{id=3,origen="Airbus A319",destino= "nuestra ksa",tiempo_estimado= 24}
-        };
-    }
+        private readonly AppContext _appContext = new AppContext();
  
     public IEnumerable<Rutas> GetAll()
     {
-        return rutas;
+        return _appContext.Rutas;
     }
  
     public Rutas GetRutaWithId(int id){
-        return rutas.SingleOrDefault(b => b.id == id);
+        return _appContext.Rutas.Find(id);
     }
 
     public Rutas Create(Rutas newRuta)
         {
-           if(rutas.Count > 0){
-           newRuta.id=rutas.Max(r => r.id) +1; 
-            }else{
-               newRuta.id = 1; 
-            }
-           rutas.Add(newRuta);
-           return newRuta;
+           var addRuta = _appContext.Rutas.Add(newRuta);
+            _appContext.SaveChanges();
+            return addRuta.Entity;
         }
 
-    public Rutas Delete(int id)
+    public void Delete(int id)
         {
-        var ruta= rutas.SingleOrDefault(b => b.id == id);
-        rutas.Remove(ruta);
-        return ruta;
+        var ruta = _appContext.Rutas.Find(id);
+        if (ruta == null)
+            return;
+        _appContext.Rutas.Remove(ruta);
+        _appContext.SaveChanges();
         }
 
     public Rutas Update(Rutas newRuta){
-            var ruta= rutas.SingleOrDefault(b => b.id == newRuta.id);
+            var ruta = _appContext.Rutas.Find(newRuta.id);
             if(ruta != null){
                 ruta.origen = newRuta.origen;
                 ruta.destino = newRuta.destino;
                 ruta.tiempo_estimado = newRuta.tiempo_estimado;
+                _appContext.SaveChanges();
             }
         return ruta;
         }

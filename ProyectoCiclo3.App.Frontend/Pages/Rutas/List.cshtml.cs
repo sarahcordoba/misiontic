@@ -32,7 +32,7 @@ namespace ProyectoCiclo3.App.Frontend.Pages
     {
         if(Ruta.id>0)
         {
-        Ruta = repositorioRutas.Delete(Ruta.id);
+        repositorioRutas.Delete(Ruta.id);
         }
         return RedirectToPage("./List");
     }

@@ -6,7 +6,7 @@
 <div class="text-center">
   <form method="POST">
     <label for="origen" class="form-label">Origen:</label>
-  <select asp-for="@ruta.origen" class="form-control">
+  <select name="origen" class="form-control">
         <option value="">Seleccionar un aeropuerto</option>
         @foreach (var aeropuerto in Model.Aeropuertos)
     {
@@ -16,7 +16,7 @@
 
 
     <label for="destino" class="form-label">Destino:</label>
-    <select asp-for="@ruta.destino" class="form-control">
+    <select name="destino" class="form-control">
         <option value="">Seleccionar un aeropuerto</option>
         @foreach (var aeropuerto in Model.Aeropuertos)
     {
@@ -25,7 +25,7 @@
     </select>
     <label for="tiempo_estimado" class="form-label">Tiempo estimado: </label>
     
-<input type="number" class="form-control" id="tiempo_estimado" placeholder="Tiempo estimado" asp-for="@ruta.tiempo_estimado">
+<input type="number" class="form-control" id="tiempo_estimado" placeholder="Tiempo estimado" name="tiempo_estimado">
    
     <hr>
     <button type="submit" class="btn btn-success">Enviar</button>
